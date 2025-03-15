@@ -1,0 +1,132 @@
+Golang
+
+-----
+
+//Quando usamos uma função init, ele roda antes de rodar o main()
+func init(){
+
+}
+
+
+-----
+
+>> Slice x array <<
+
+//Slice são listas (tratados como arrays) mas recebem as funções de append, delete... arraw é criado sem o tamanho definido
+
+slice: var lista = []int
+array: var lista = [10]int
+
+var lista = []int
+lista = append(lista, 1)
+
+array
+var lista = [1]int
+lista[0] = 1
+
+
+-----
+
+>> Maps (dictionary) <<
+
+m := make(map[string]int)
+m["sp"] = 10000
+m["cg"] = 9000
+m["rj"] = 7000
+
+valor, foiEncontrado := m["rj"]
+
+if foiEncontrado {
+	fmt.Println(valor)
+}else{
+	fmt.Println("chave não existe")
+}
+
+for chave, valor := range m {
+	fmt.Println("Cidade", chave, "habitantes", valor)
+}
+
+
+-----
+
+//inicializa o projeto com o nome do projeto e a versão do go, é aqui que será incluído os pacotes de terceiros para que ao compartilhar esse projeto todos os devs atuem nas mesmas versões
+go mod init projectname
+
+
+-----
+
+//struct -> Se o struct é criado com nome com letra MAIUSCULA ela é public (pode ser acessada por outros files) se não ela é PRIVATE, só existe no pacote atual.. o mesmo ocorre nas propriedades da struct
+
+type endereco struct {
+	rua string
+	numero int
+	cidade string
+}
+
+endereco := endereco {
+	rua: "Rua X",
+	numero: 15,
+	cidade: "Itajai",
+}
+
+fmt.Println(endereco)
+
+
+-----
+
+método é uma função que será um método de uma classe
+
+type Pessoa struct {
+	Nome	string
+	Endereco Endereco
+	DataNascimento time.Time
+}
+
+//aqui o método
+func (p *Pessoa) IdadeAtual() int {
+	anoNascimento := p.DataNascimento.Year()
+	anoAtual := time.Now().Year()
+	return anoAtual - anoNascimento	
+	
+}
+
+//aqui em função
+func CalculaIdade (p Pessoa) int {
+	anoNascimento := p.DataNascimento.Year()
+	anoAtual := time.Now().Year()
+	return anoAtual - anoNascimento		
+}
+
+-----
+
+F2 para renomear refatora em todos os fontes
+
+
+-----
+
+Herança:
+
+type Automovel struct {
+	Ano int
+	Placa string
+}
+
+type Moto struct {
+	Automovel
+	Cilindradas int
+}
+
+type Carro struct {
+	Automovel
+	Potencia int	
+}
+
+automovelMoto := model.Automovel {
+	Ano: 2022,
+	Placa: "TTT",
+}
+moto := model.Moto {
+	Automovel: automovelMoto,
+	Cilidradas: 125,
+}
+
