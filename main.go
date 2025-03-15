@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-to-do/GoCoursePractice/Model"
+	"go-to-do/GoPractice/Model"
 )
 
 func main() {
