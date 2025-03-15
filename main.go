@@ -1,8 +1,8 @@
 package main
 
 import (
+	"GoPractice/Model"
 	"fmt"
-	"go-to-do/GoPractice/Model"
 )
 
 func main() {
