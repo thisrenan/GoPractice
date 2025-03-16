@@ -1,19 +1,43 @@
 package Model
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
-type Compra struct {
-	Itens []Item
-	Date  time.Time
+type Buy struct {
+	Market string
+	Items  []Item
+	Date   time.Time
 }
 
-func Start(produto string) Compra {
-	var listItem = []Item{}
+func Start(market string, listItem []Item) (*Buy, error) {
 
-	item := Item{Nome: produto}
-	listItem = append(listItem, item)
+	if market == "" {
+		return nil, errors.New("market is necessary")
+	}
 
-	compra := Compra{listItem, time.Now()}
+	if len(listItem) == 0 {
+		return nil, errors.New("item list is mandatory")
+	}
 
-	return compra
+	return &Buy{market, listItem, time.Now()}, nil
+}
+
+func StartString(market string, listItem []string) (*Buy, error) {
+
+	if market == "" {
+		return nil, errors.New("market is necessary")
+	}
+
+	if len(listItem) == 0 {
+		return nil, errors.New("item list is mandatory")
+	}
+
+	var items []Item
+	for _, name := range listItem {
+		items = append(items, Item{Name: name})
+	}
+
+	return &Buy{market, items, time.Now()}, nil
 }
