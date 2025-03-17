@@ -32,4 +32,21 @@ func main() {
 		fmt.Println(compraString.Market, compraString.Date, compraString.Items[0].Name)
 	}
 
+	/* template test */
+
+	rectangle := Model.Rectangle{
+		Width:  1,
+		Height: 2,
+	}
+
+	Model.ShowRectangleArea(rectangle)
+
+	circle := Model.Circle{
+		Radius: 1,
+	}
+
+	Model.ShowCircleArea(circle)
+
+	Model.ShowGeometry(rectangle)
+	Model.ShowGeometry(circle)
 }
