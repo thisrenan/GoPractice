@@ -156,6 +156,26 @@ func main() {
 	}
 	time.Sleep(time.Second * 5)
 	fmt.Println(i)
+
+	/* channel */
+
+	//define a non buffer channel, to a buffer chanel you need to set the lenght ~~> channel := make(chan int, 100)
+	channel := make(chan int)
+	go setList(channel)
+
+	for v := range channel {
+		fmt.Println(v)
+	}
+}
+
+//func setList(channel <- chan int) {   ~~> to definy the channel as read only
+//func setList(channel chan <- int) {   ~~> to definy the channel as write only
+
+func setList(channel chan int) {
+	for i := 0; i < 10; i++ {
+		channel <- i
+	}
+	close(channel)
 }
 
 func callDatabase(wg *sync.WaitGroup) {
