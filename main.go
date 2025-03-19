@@ -51,6 +51,8 @@ func main() {
 	Model.ShowGeometry(rectangle)
 	Model.ShowGeometry(circle)
 
+	/* Error tests */
+
 	ShowError(errors.New("a Error"))
 
 	p := NetWorkProblem{
@@ -59,6 +61,12 @@ func main() {
 	}
 
 	ShowError(p)
+
+	/* Empty interfaces tests */
+	var emptyInterface interface{}
+	emptyInterface = Model.Circle{Radius: 10}
+	fmt.Println(emptyInterface)
+
 }
 
 type NetWorkProblem struct {
