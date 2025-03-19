@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"sync"
+	"time"
 
 	"github.com/fatih/color"
 )
@@ -119,6 +121,66 @@ func main() {
 	//go get github.com/fatih/color
 	//only works with go.mod -> go mod init <projectname>
 
+	printColors()
+
+	/* go routines */
+
+	//strconv.Itoa convert an integer for string
+	//go is the same as async
+
+	/*
+		for i := 0; i < 10; i++ {
+			go showMessage(strconv.Itoa(i))
+		}
+	*/
+
+	//sync.WaitGroup is the same as await, but you can "group" various calls
+	var wg sync.WaitGroup
+
+	wg.Add(3)
+	go callDatabase(&wg)
+	go callAPI(&wg)
+	go processInternal(&wg)
+
+	wg.Wait()
+
+	//Mutex is for lock an data for the go routine not subscribe this data
+	var m sync.Mutex
+	i := 0
+	for x := 0; x < 10000; x++ {
+		go func() {
+			m.Lock()
+			i++
+			m.Unlock()
+		}()
+	}
+	time.Sleep(time.Second * 5)
+	fmt.Println(i)
+}
+
+func callDatabase(wg *sync.WaitGroup) {
+	time.Sleep(1 * time.Second)
+	fmt.Println("callDatabase")
+	wg.Done()
+}
+
+func callAPI(wg *sync.WaitGroup) {
+	time.Sleep(2 * time.Second)
+	fmt.Println("callAPI")
+	wg.Done()
+}
+
+func processInternal(wg *sync.WaitGroup) {
+	time.Sleep(1 * time.Second)
+	fmt.Println("processInternal")
+	wg.Done()
+}
+
+func showMessage(message string) {
+	fmt.Println(message)
+}
+
+func printColors() {
 	color.Blue("blue line")
 	color.Red("red line")
 	color.Magenta("And many others ..")
@@ -176,7 +238,6 @@ func main() {
 	defer color.Unset() // Use it in your function
 
 	fmt.Println("All text will now be bold magenta.")
-
 }
 
 type NetWorkProblem struct {
