@@ -2,6 +2,7 @@ package main
 
 import (
 	"GoPractice/Model"
+	"errors"
 	"fmt"
 )
 
@@ -49,4 +50,33 @@ func main() {
 
 	Model.ShowGeometry(rectangle)
 	Model.ShowGeometry(circle)
+
+	ShowError(errors.New("a Error"))
+
+	p := NetWorkProblem{
+		NetWork:  true,
+		Hardware: false,
+	}
+
+	ShowError(p)
+}
+
+type NetWorkProblem struct {
+	NetWork  bool
+	Hardware bool
+}
+
+func (p NetWorkProblem) Error() string {
+	if p.NetWork {
+		return "Network problem"
+	} else if p.Hardware {
+		return "Hardware problem"
+	} else {
+		return "Another Problem"
+	}
+
+}
+
+func ShowError(err error) {
+	fmt.Println(err.Error())
 }
