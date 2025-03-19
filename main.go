@@ -97,6 +97,9 @@ func main() {
 	newString := reverseGeneric(sliceString)
 	fmt.Println(newString)
 
+	newString2 := reverseGenericConstraint(sliceString)
+	fmt.Println(newString2)
+
 }
 
 type NetWorkProblem struct {
@@ -131,6 +134,22 @@ func reverse(slice []int) []int {
 }
 
 func reverseGeneric[T int | string](slice []T) []T {
+	newInt := make([]T, len(slice))
+
+	newIntLen := len(slice) - 1
+
+	for i := 0; i < len(slice); i++ {
+		newInt[newIntLen] = slice[i]
+		newIntLen--
+	}
+	return newInt
+}
+
+type constraintCustom interface {
+	int | string
+}
+
+func reverseGenericConstraint[T constraintCustom](slice []T) []T {
 	newInt := make([]T, len(slice))
 
 	newIntLen := len(slice) - 1
