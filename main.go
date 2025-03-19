@@ -86,6 +86,12 @@ func main() {
 			fmt.Println(value)
 		}
 	}
+
+	/* Generics */
+	slice := []int{5, 1, 2, 3}
+	newInt := reverse(slice)
+	fmt.Println(newInt)
+
 }
 
 type NetWorkProblem struct {
@@ -105,4 +111,16 @@ func (p NetWorkProblem) Error() string {
 
 func ShowError(err error) {
 	fmt.Println(err.Error())
+}
+
+func reverse(slice []int) []int {
+	newInt := make([]int, len(slice))
+
+	newIntLen := len(slice) - 1
+
+	for i := 0; i < len(slice); i++ {
+		newInt[newIntLen] = slice[i]
+		newIntLen--
+	}
+	return newInt
 }
