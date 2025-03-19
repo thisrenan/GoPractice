@@ -4,6 +4,7 @@ import (
 	"GoPractice/Model"
 	"errors"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -99,6 +100,12 @@ func main() {
 
 	newString2 := reverseGenericConstraint(sliceString)
 	fmt.Println(newString2)
+
+	_, err3 := os.Open("C:\1741611652178.jpeg")
+
+	if err3 != nil {
+		panic("error: not found database")
+	}
 
 }
 
