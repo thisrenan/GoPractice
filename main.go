@@ -101,11 +101,17 @@ func main() {
 	newString2 := reverseGenericConstraint(sliceString)
 	fmt.Println(newString2)
 
-	_, err3 := os.Open("C:\1741611652178.jpeg")
+	/* panic and defer*/
 
-	if err3 != nil {
-		panic("error: not found database")
+	file, err := os.Create("./settings.txt")
+	//defer make the instruction at the end at the function
+	defer file.Close()
+
+	if err != nil {
+		panic(err)
 	}
+
+	file.Write([]byte("teste"))
 
 }
 
