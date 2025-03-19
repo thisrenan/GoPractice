@@ -87,10 +87,15 @@ func main() {
 		}
 	}
 
-	/* Generics */
+	/* Generics - Slice reverse int */
 	slice := []int{5, 1, 2, 3}
 	newInt := reverse(slice)
 	fmt.Println(newInt)
+
+	/* Generics - Slice reverse generics */
+	sliceString := []string{"a", "e", "f", "b"}
+	newString := reverseGeneric(sliceString)
+	fmt.Println(newString)
 
 }
 
@@ -115,6 +120,18 @@ func ShowError(err error) {
 
 func reverse(slice []int) []int {
 	newInt := make([]int, len(slice))
+
+	newIntLen := len(slice) - 1
+
+	for i := 0; i < len(slice); i++ {
+		newInt[newIntLen] = slice[i]
+		newIntLen--
+	}
+	return newInt
+}
+
+func reverseGeneric[T int | string](slice []T) []T {
+	newInt := make([]T, len(slice))
 
 	newIntLen := len(slice) - 1
 
