@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"os"
+
+	"github.com/fatih/color"
 )
 
 func main() {
@@ -112,6 +114,13 @@ func main() {
 	}
 
 	file.Write([]byte("teste"))
+
+	/* go get */
+	//go get github.com/fatih/color
+	//only works with go.mod -> go mod init <projectname>
+
+	color.Blue("blue line")
+	color.Red("red line")
 
 }
 
