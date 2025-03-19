@@ -121,6 +121,61 @@ func main() {
 
 	color.Blue("blue line")
 	color.Red("red line")
+	color.Magenta("And many others ..")
+	color.RGB(255, 128, 0).Println("foreground orange")
+	color.RGB(230, 42, 42).Println("foreground red")
+
+	color.BgRGB(255, 128, 0).Println("background orange")
+	color.BgRGB(230, 42, 42).Println("background red")
+
+	c := color.New(color.FgCyan).Add(color.Underline)
+	c.Println("Prints cyan text with an underline.")
+
+	d := color.New(color.FgCyan, color.Bold)
+	d.Printf("This prints bold cyan %s\n", "too!.")
+
+	// Mix up foreground and background colors, create new mixes!
+	red := color.New(color.FgRed)
+
+	boldRed := red.Add(color.Bold)
+	boldRed.Println("This will print text in bold red.")
+
+	whiteBackground := red.Add(color.BgWhite)
+	whiteBackground.Println("Red text with white background.")
+
+	// Mix with RGB color codes
+	color.RGB(255, 128, 0).AddBgRGB(0, 0, 0).Println("orange with black background")
+
+	color.BgRGB(255, 128, 0).AddRGB(255, 255, 255).Println("orange background with white foreground")
+
+	// Create SprintXxx functions to mix strings with other non-colorized strings:
+	yellow := color.New(color.FgYellow).SprintFunc()
+	red2 := color.New(color.FgRed).SprintFunc()
+	fmt.Printf("This is a %s and this is %s.\n", yellow("warning"), red2("error"))
+
+	info := color.New(color.FgWhite, color.BgGreen).SprintFunc()
+	fmt.Printf("This %s rocks!\n", info("package"))
+
+	// Use helper functions
+	fmt.Println("This", color.RedString("warning"), "should be not neglected.")
+	fmt.Printf("%v %v\n", color.GreenString("Info:"), "an important message.")
+
+	// Windows supported too! Just don't forget to change the output to color.Output
+	fmt.Fprintf(color.Output, "Windows support: %s", color.GreenString("PASS"))
+
+	// Use handy standard colors
+	color.Set(color.FgYellow)
+
+	fmt.Println("\nExisting text will now be in yellow")
+	fmt.Printf("This one %s\n", "too")
+
+	color.Unset() // Don't forget to unset
+
+	// You can mix up parameters
+	color.Set(color.FgMagenta, color.Bold)
+	defer color.Unset() // Use it in your function
+
+	fmt.Println("All text will now be bold magenta.")
 
 }
 
