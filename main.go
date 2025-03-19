@@ -67,6 +67,25 @@ func main() {
 	emptyInterface = Model.Circle{Radius: 10}
 	fmt.Println(emptyInterface)
 
+	//with an empty list as interface you can add any go datatype
+	var emptyList []interface{}
+	emptyList = append(emptyList, 10)
+	emptyList = append(emptyList, true)
+	emptyList = append(emptyList, "test")
+
+	//iterate through the entire list and print its value
+	for _, value := range emptyList {
+		fmt.Println(value)
+	}
+
+	//iterate through the entire list and print its value and type if string
+	for _, value := range emptyList {
+		if v, ok := value.(string); ok {
+			fmt.Println(v + "string")
+		} else {
+			fmt.Println(value)
+		}
+	}
 }
 
 type NetWorkProblem struct {
@@ -82,7 +101,6 @@ func (p NetWorkProblem) Error() string {
 	} else {
 		return "Another Problem"
 	}
-
 }
 
 func ShowError(err error) {
